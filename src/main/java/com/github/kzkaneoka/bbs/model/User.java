@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
+import java.util.UUID;
 
 @Data
 @NoArgsConstructor
@@ -14,7 +16,7 @@ import java.io.Serializable;
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private UUID id;
     @Column(name = "username")
     private String username;
     @Column(name = "email")
@@ -23,6 +25,8 @@ public class User implements Serializable {
     private String password;
     @Column(name = "status")
     private UserStatus status;
+    @OneToMany(mappedBy = "user")
+    private Set<Form> forms;
 
     public User(String username, String email, String password) {
         this.username = username;

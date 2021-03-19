@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api")
@@ -34,7 +35,7 @@ public class AdminController {
     }
 
     @GetMapping("/admins/{id}")
-    public ResponseEntity<Admin> getadminById(@PathVariable("id") Long id) {
+    public ResponseEntity<Admin> getadminById(@PathVariable("id") UUID id) {
         Optional<Admin> adminData = adminRepository.findById(id);
 
         if (adminData.isPresent()) {
@@ -56,7 +57,7 @@ public class AdminController {
     }
 
     @PutMapping("/admins/{id}")
-    public ResponseEntity<Admin> updateAdmin(@PathVariable("id") Long id, @RequestBody Admin admin) {
+    public ResponseEntity<Admin> updateAdmin(@PathVariable("id") UUID id, @RequestBody Admin admin) {
         Optional<Admin> adminData = adminRepository.findById(id);
 
         if (adminData.isPresent()) {
@@ -71,7 +72,7 @@ public class AdminController {
     }
 
     @DeleteMapping("/admins/{id}")
-    public ResponseEntity<HttpStatus> deleteAdmin(@PathVariable("id") Long id) {
+    public ResponseEntity<HttpStatus> deleteAdmin(@PathVariable("id") UUID id) {
         try {
             adminRepository.deleteById(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

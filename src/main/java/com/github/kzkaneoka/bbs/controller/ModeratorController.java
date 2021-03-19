@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api")
@@ -34,7 +35,7 @@ public class ModeratorController {
     }
 
     @GetMapping("/moderators/{id}")
-    public ResponseEntity<Moderator> getmoderatorById(@PathVariable("id") Long id) {
+    public ResponseEntity<Moderator> getmoderatorById(@PathVariable("id") UUID id) {
         Optional<Moderator> moderatorData = moderatorRepository.findById(id);
 
         if (moderatorData.isPresent()) {
@@ -56,7 +57,7 @@ public class ModeratorController {
     }
 
     @PutMapping("/moderators/{id}")
-    public ResponseEntity<Moderator> updateModerator(@PathVariable("id") Long id, @RequestBody Moderator moderator) {
+    public ResponseEntity<Moderator> updateModerator(@PathVariable("id") UUID id, @RequestBody Moderator moderator) {
         Optional<Moderator> moderatorData = moderatorRepository.findById(id);
 
         if (moderatorData.isPresent()) {
@@ -71,7 +72,7 @@ public class ModeratorController {
     }
 
     @DeleteMapping("/moderators/{id}")
-    public ResponseEntity<HttpStatus> deleteModerator(@PathVariable("id") Long id) {
+    public ResponseEntity<HttpStatus> deleteModerator(@PathVariable("id") UUID id) {
         try {
             moderatorRepository.deleteById(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
