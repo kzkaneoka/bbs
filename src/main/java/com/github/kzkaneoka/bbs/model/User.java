@@ -1,7 +1,6 @@
 package com.github.kzkaneoka.bbs.model;
 
 import com.github.kzkaneoka.bbs.enums.UserStatus;
-import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
