@@ -9,7 +9,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Data
-@NoArgsConstructor(access= AccessLevel.PRIVATE, force = true)
+@NoArgsConstructor
 @Entity
 @Table(name = "users")
 public class User implements Serializable {
