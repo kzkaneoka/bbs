@@ -27,6 +27,8 @@ public class User implements Serializable {
     private UserStatus status;
     @OneToMany(mappedBy = "user")
     private Set<Form> forms;
+    @OneToMany(mappedBy = "user")
+    private Set<Comment> comments;
 
     public User(String username, String email, String password) {
         this.username = username;
