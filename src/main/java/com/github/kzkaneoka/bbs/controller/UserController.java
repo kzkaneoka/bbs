@@ -22,79 +22,56 @@ public class UserController {
 
     @GetMapping("/users")
     public ResponseEntity<List<User>> getAllUsers() {
-        try {
-            List<User> users = new ArrayList<>();
-            userRepository.findAll().forEach(users::add);
-            if (users.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-
-            return new ResponseEntity<>(users, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        List<User> users = new ArrayList<>();
+        userRepository.findAll().forEach(users::add);
+        if (users.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
+        return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
     @GetMapping("/users/{id}")
     public ResponseEntity<User> getuserById(@PathVariable("id") UUID id) {
         Optional<User> userData = userRepository.findById(id);
-
-        if (userData.isPresent()) {
-            return new ResponseEntity<>(userData.get(), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        return new ResponseEntity<>(userData.get(), HttpStatus.OK);
     }
 
     @PostMapping("/users")
     public ResponseEntity<User> createUser(@RequestBody User user) {
-        try {
-            User _user = null;
-            UserRole role = user.getRole();
-            if (role == null) {
-                _user = userRepository
-                        .save(new User(user.getUsername(), user.getEmail(), user.getPassword()));
-            } else {
-                _user = userRepository
-                        .save(new User(user.getUsername(), user.getEmail(), user.getPassword(), user.getRole()));
-            }
-            return new ResponseEntity<>(_user, HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        User _user = null;
+        UserRole role = user.getRole();
+        if (role == null) {
+            _user = userRepository
+                    .save(new User(user.getUsername(), user.getEmail(), user.getPassword()));
+        } else {
+            _user = userRepository
+                    .save(new User(user.getUsername(), user.getEmail(), user.getPassword(), user.getRole()));
         }
+        return new ResponseEntity<>(_user, HttpStatus.CREATED);
     }
 
     @PutMapping("/users/{id}")
     public ResponseEntity<User> updateUser(@PathVariable("id") UUID id, @RequestBody User user) {
         Optional<User> userData = userRepository.findById(id);
-
-        if (userData.isPresent()) {
-            User _user = userData.get();
+        User _user = userData.get();
+        if (user.getUsername() != null && !user.getUsername().isEmpty()) {
             _user.setUsername(user.getUsername());
-            _user.setEmail(user.getEmail());
-            return new ResponseEntity<>(userRepository.save(_user), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+        if (user.getEmail() != null && !user.getEmail().isEmpty()) {
+            _user.setEmail(user.getEmail());
+        }
+        return new ResponseEntity<>(userRepository.save(_user), HttpStatus.OK);
     }
 
     @DeleteMapping("/users/{id}")
     public ResponseEntity<HttpStatus> deleteUser(@PathVariable("id") UUID id) {
-        try {
-            userRepository.deleteById(id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        userRepository.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping("/users")
     public ResponseEntity<HttpStatus> deleteAllUsers() {
-        try {
-            userRepository.deleteAll();
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        userRepository.deleteAll();
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
