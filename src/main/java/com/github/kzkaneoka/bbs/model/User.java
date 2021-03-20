@@ -1,5 +1,6 @@
 package com.github.kzkaneoka.bbs.model;
 
+import com.github.kzkaneoka.bbs.enums.UserRole;
 import com.github.kzkaneoka.bbs.enums.UserStatus;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,7 +24,11 @@ public class User implements Serializable {
     private String email;
     @Column(name = "password")
     private String password;
+    @Column(name = "role")
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
     @Column(name = "status")
+    @Enumerated(EnumType.STRING)
     private UserStatus status;
     @OneToMany(mappedBy = "user")
     private Set<Form> forms;
@@ -34,6 +39,8 @@ public class User implements Serializable {
         this.username = username;
         this.email = email;
         this.password = password;
+        this.role = UserRole.NORMAL;
         this.status = UserStatus.ACTIVE;
+
     }
 }
