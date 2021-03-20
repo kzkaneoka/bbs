@@ -6,12 +6,12 @@ import com.github.kzkaneoka.bbs.model.User;
 import com.github.kzkaneoka.bbs.payload.request.LoginRequest;
 import com.github.kzkaneoka.bbs.payload.request.SignupRequest;
 import com.github.kzkaneoka.bbs.payload.response.JwtResponse;
-import com.github.kzkaneoka.bbs.payload.response.MessageResponse;
 import com.github.kzkaneoka.bbs.repository.RoleRepository;
 import com.github.kzkaneoka.bbs.repository.UserRepository;
 import com.github.kzkaneoka.bbs.security.UserDetailsImpl;
 import com.github.kzkaneoka.bbs.security.jwt.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -102,6 +102,6 @@ public class AuthController {
         user.setRoles(roles);
         userRepository.save(user);
 
-        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 }

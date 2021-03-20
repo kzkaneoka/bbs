@@ -1,5 +1,6 @@
 package com.github.kzkaneoka.bbs.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.kzkaneoka.bbs.enums.UserRole;
 import com.github.kzkaneoka.bbs.enums.UserStatus;
 import lombok.Data;
@@ -25,6 +26,7 @@ public class User implements Serializable {
     @Column(name = "email", unique = true, nullable = false)
     private String email;
     @Column(name = "password", nullable = false)
+    @JsonIgnore
     private String password;
 
     @ManyToMany
