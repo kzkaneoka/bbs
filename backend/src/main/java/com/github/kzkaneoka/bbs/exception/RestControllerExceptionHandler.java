@@ -21,25 +21,25 @@ public class RestControllerExceptionHandler {
 
     @ExceptionHandler(value = { NoSuchElementException.class })
     public ResponseEntity<Object> handleNotSuchElementException(NoSuchElementException e) {
-        LOGGER.error("NoSuchElementException: ", e.getMessage());
+        LOGGER.error("NoSuchElementException: {}", e.getMessage());
         return new ResponseEntity<Object>("Recource not found", HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(value = { DataIntegrityViolationException.class })
     public ResponseEntity<Object> handleDataIntegrityViolationException(DataIntegrityViolationException e) {
-        LOGGER.error("DataIntegrityViolationException: ", e.getMessage());
+        LOGGER.error("DataIntegrityViolationException: {}", e.getMessage());
         return new ResponseEntity<Object>("Invalid inputs", HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(value = { EmptyResultDataAccessException.class })
     public ResponseEntity<Object> handleEmptyResultDataAccessException(EmptyResultDataAccessException e) {
-        LOGGER.error("EmptyResultDataAccessException: ", e.getMessage());
+        LOGGER.error("EmptyResultDataAccessException: {}", e.getMessage());
         return new ResponseEntity<Object>("Invalid inputs", HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(value = { Exception.class })
     public ResponseEntity<Object> handleException(Exception e) {
-        LOGGER.error("Exception: ", e.getMessage());
+        LOGGER.error("Exception: {}", e.getMessage());
         return new ResponseEntity<Object>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
