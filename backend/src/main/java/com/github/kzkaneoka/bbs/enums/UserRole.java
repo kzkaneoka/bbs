@@ -1,7 +1,7 @@
 package com.github.kzkaneoka.bbs.enums;
 
 public enum UserRole {
-    NORMAL,
-    ADMIN,
-    MODERATOR
+    ROLE_USSER,
+    ROLE_ADMIN,
+    ROLE_MODERATOR
 }

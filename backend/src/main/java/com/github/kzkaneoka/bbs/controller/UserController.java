@@ -1,6 +1,5 @@
 package com.github.kzkaneoka.bbs.controller;
 
-import com.github.kzkaneoka.bbs.enums.UserRole;
 import com.github.kzkaneoka.bbs.model.User;
 import com.github.kzkaneoka.bbs.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,20 +33,6 @@ public class UserController {
     public ResponseEntity<User> getuserById(@PathVariable("id") UUID id) {
         Optional<User> userData = userRepository.findById(id);
         return new ResponseEntity<>(userData.get(), HttpStatus.OK);
-    }
-
-    @PostMapping("/users")
-    public ResponseEntity<User> createUser(@RequestBody User user) {
-        User _user = null;
-        UserRole role = user.getRole();
-        if (role == null) {
-            _user = userRepository
-                    .save(new User(user.getUsername(), user.getEmail(), user.getPassword()));
-        } else {
-            _user = userRepository
-                    .save(new User(user.getUsername(), user.getEmail(), user.getPassword(), user.getRole()));
-        }
-        return new ResponseEntity<>(_user, HttpStatus.CREATED);
     }
 
     @PutMapping("/users/{id}")

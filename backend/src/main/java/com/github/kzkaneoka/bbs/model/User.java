@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -24,9 +25,13 @@ public class User implements Serializable {
     private String email;
     @Column(name = "password", nullable = false)
     private String password;
-    @Column(name = "role", nullable = false)
-    @Enumerated(EnumType.STRING)
-    private UserRole role;
+
+    @ManyToMany
+    @JoinTable(name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
+
     @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
     private UserStatus status;
@@ -39,15 +44,6 @@ public class User implements Serializable {
         this.username = username;
         this.email = email;
         this.password = password;
-        this.role = UserRole.NORMAL;
-        this.status = UserStatus.ACTIVE;
-    }
-
-    public User(String username, String email, String password, UserRole role) {
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        this.role = role;
         this.status = UserStatus.ACTIVE;
     }
 }
