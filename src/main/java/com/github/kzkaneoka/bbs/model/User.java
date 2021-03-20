@@ -18,9 +18,9 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
-    @Column(name = "username")
+    @Column(name = "username", unique = true)
     private String username;
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     private String email;
     @Column(name = "password")
     private String password;
@@ -41,6 +41,13 @@ public class User implements Serializable {
         this.password = password;
         this.role = UserRole.NORMAL;
         this.status = UserStatus.ACTIVE;
+    }
 
+    public User(String username, String email, String password, UserRole role) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.status = UserStatus.ACTIVE;
     }
 }

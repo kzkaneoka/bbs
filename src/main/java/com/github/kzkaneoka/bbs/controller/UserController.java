@@ -1,5 +1,6 @@
 package com.github.kzkaneoka.bbs.controller;
 
+import com.github.kzkaneoka.bbs.enums.UserRole;
 import com.github.kzkaneoka.bbs.model.User;
 import com.github.kzkaneoka.bbs.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,8 +49,15 @@ public class UserController {
     @PostMapping("/users")
     public ResponseEntity<User> createUser(@RequestBody User user) {
         try {
-            User _user = userRepository
-                    .save(new User(user.getUsername(), user.getEmail(), user.getPassword()));
+            User _user = null;
+            UserRole role = user.getRole();
+            if (role == null) {
+                _user = userRepository
+                        .save(new User(user.getUsername(), user.getEmail(), user.getPassword()));
+            } else {
+                _user = userRepository
+                        .save(new User(user.getUsername(), user.getEmail(), user.getPassword(), user.getRole()));
+            }
             return new ResponseEntity<>(_user, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -64,7 +72,6 @@ public class UserController {
             User _user = userData.get();
             _user.setUsername(user.getUsername());
             _user.setEmail(user.getEmail());
-            _user.setPassword(user.getPassword());
             return new ResponseEntity<>(userRepository.save(_user), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
