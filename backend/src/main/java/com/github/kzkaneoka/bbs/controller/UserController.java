@@ -1,8 +1,8 @@
 package com.github.kzkaneoka.bbs.controller;
 
 import com.github.kzkaneoka.bbs.enums.UserRole;
-import com.github.kzkaneoka.bbs.exception.RestControllerExceptionHandler;
 import com.github.kzkaneoka.bbs.model.User;
+import com.github.kzkaneoka.bbs.repository.RoleRepository;
 import com.github.kzkaneoka.bbs.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -59,14 +59,13 @@ public class UserController {
                 && !userData.get().getUsername().equals(principal.getName())) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
-        User _user = userData.get();
         if (user.getUsername() != null && !user.getUsername().isEmpty()) {
-            _user.setUsername(user.getUsername());
+            userData.get().setUsername(user.getUsername());
         }
         if (user.getEmail() != null && !user.getEmail().isEmpty()) {
-            _user.setEmail(user.getEmail());
+            userData.get().setEmail(user.getEmail());
         }
-        return new ResponseEntity<>(userRepository.save(_user), HttpStatus.OK);
+        return new ResponseEntity<>(userRepository.save(userData.get()), HttpStatus.OK);
     }
 
     @DeleteMapping("/users/{id}")

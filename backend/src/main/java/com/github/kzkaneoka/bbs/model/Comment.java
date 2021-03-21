@@ -1,9 +1,11 @@
 package com.github.kzkaneoka.bbs.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Set;
 import java.util.UUID;
 
 @Data
@@ -16,10 +18,10 @@ public class Comment {
     private UUID id;
     @Column(name = "text")
     private String text;
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "form_id")
     private Form form;
 

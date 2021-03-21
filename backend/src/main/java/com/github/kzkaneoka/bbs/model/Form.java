@@ -1,11 +1,13 @@
 package com.github.kzkaneoka.bbs.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.kzkaneoka.bbs.enums.FormStatus;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 import java.util.UUID;
 
 @Data
@@ -22,14 +24,17 @@ public class Form implements Serializable {
     private String description;
     @Column(name = "status")
     private FormStatus status;
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+    @OneToMany(mappedBy = "form", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Set<Comment> comments;
 
     public Form(String title, String description, User user) {
         this.title = title;
         this.description = description;
-        this.status = FormStatus.OPEN;
         this.user = user;
+        this.status = FormStatus.OPEN;
     }
 }
