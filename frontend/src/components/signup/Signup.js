@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
-export default function Signup(props) {
+export default function Signup() {
   const [user, setUser] = useState({
     username: '',
     email: '',
