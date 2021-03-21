@@ -1,12 +1,12 @@
 package com.github.kzkaneoka.bbs.exception;
 
-import org.hibernate.exception.ConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,6 +35,12 @@ public class RestControllerExceptionHandler {
     public ResponseEntity<Object> handleEmptyResultDataAccessException(EmptyResultDataAccessException e) {
         LOGGER.error("EmptyResultDataAccessException: {}", e.getMessage());
         return new ResponseEntity<Object>("Invalid inputs", HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(value = { HttpRequestMethodNotSupportedException.class })
+    public ResponseEntity<Object> handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
+        LOGGER.error("HttpRequestMethodNotSupportedException: {}", e.getMessage());
+        return new ResponseEntity<Object>("Invalid request method", HttpStatus.METHOD_NOT_ALLOWED);
     }
 
     @ExceptionHandler(value = { Exception.class })
