@@ -1,7 +1,6 @@
 package com.github.kzkaneoka.bbs.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.github.kzkaneoka.bbs.enums.UserRole;
 import com.github.kzkaneoka.bbs.enums.UserStatus;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,7 +8,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 

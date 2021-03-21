@@ -28,7 +28,6 @@ public class FormController {
     UserRepository userRepository;
 
     @GetMapping("/forms")
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<Form>> getAllForms() {
         List<Form> forms = new ArrayList<>();
         formRepository.findAll().forEach(forms::add);
@@ -39,14 +38,8 @@ public class FormController {
     }
 
     @GetMapping("/forms/{id}")
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-    public ResponseEntity<Form> getFormById(@PathVariable("id") UUID id, Principal principal) {
+    public ResponseEntity<Form> getFormById(@PathVariable("id") UUID id) {
         Optional<Form> formData = formRepository.findById(id);
-        User loggedInUser = userRepository.findByUsername(principal.getName());
-        if (!loggedInUser.getRoles().stream().anyMatch(role -> role.getName().equals(UserRole.ROLE_ADMIN))
-                && !formData.get().getUser().getUsername().equals(principal.getName())) {
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }
         return new ResponseEntity<>(formData.get(), HttpStatus.OK);
     }
 

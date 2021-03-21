@@ -1,12 +1,19 @@
 package com.github.kzkaneoka.bbs.controller;
 
+import com.github.kzkaneoka.bbs.enums.UserRole;
 import com.github.kzkaneoka.bbs.model.Comment;
+import com.github.kzkaneoka.bbs.model.Form;
+import com.github.kzkaneoka.bbs.model.User;
 import com.github.kzkaneoka.bbs.repository.CommentRepository;
+import com.github.kzkaneoka.bbs.repository.FormRepository;
+import com.github.kzkaneoka.bbs.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -19,75 +26,85 @@ public class CommentController {
     @Autowired
     CommentRepository commentRepository;
 
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    FormRepository formRepository;
+
     @GetMapping("/comments")
     public ResponseEntity<List<Comment>> getAllComments() {
-        try {
-            List<Comment> comments = new ArrayList<>();
-            commentRepository.findAll().forEach(comments::add);
-            if (comments.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-
-            return new ResponseEntity<>(comments, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        List<Comment> comments = new ArrayList<>();
+        commentRepository.findAll().forEach(comments::add);
+        if (comments.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
+        return new ResponseEntity<>(comments, HttpStatus.OK);
     }
 
     @GetMapping("/comments/{id}")
-    public ResponseEntity<Comment> getcommentById(@PathVariable("id") UUID id) {
+    public ResponseEntity<Comment> getCommentById(@PathVariable("id") UUID id) {
         Optional<Comment> commentData = commentRepository.findById(id);
-
-        if (commentData.isPresent()) {
-            return new ResponseEntity<>(commentData.get(), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        return new ResponseEntity<>(commentData.get(), HttpStatus.OK);
     }
 
-    @PostMapping("/comments")
-    public ResponseEntity<Comment> createComment(@RequestBody Comment comment) {
-        try {
-            Comment _comment = commentRepository
-                    .save(new Comment(comment.getText(), comment.getUser(), comment.getForm()));
-            return new ResponseEntity<>(_comment, HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    @PostMapping("/forms/{formId}/comments")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    public ResponseEntity<Comment> createComment(@PathVariable("formId") UUID formId,
+                                                 @RequestBody Comment comment, Principal principal) {
+        Optional<Form> formData = formRepository.findById(formId);
+        User _user = userRepository.findByUsername(principal.getName());
+        Comment _comment = commentRepository.save(new Comment(comment.getText(), _user, formData.get()));
+        return new ResponseEntity<>(_comment, HttpStatus.CREATED);
     }
 
-    @PutMapping("/comments/{id}")
-    public ResponseEntity<Comment> updateComment(@PathVariable("id") UUID id, @RequestBody Comment comment) {
+    @PutMapping("/forms/{formId}/comments/{id}")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    public ResponseEntity<Comment> updateComment(@PathVariable("formId") UUID formId,
+                                                 @PathVariable("id") UUID id,
+                                                 @RequestBody Comment comment, Principal principal) {
         Optional<Comment> commentData = commentRepository.findById(id);
-
-        if (commentData.isPresent()) {
-            Comment _comment = commentData.get();
-            _comment.setText(comment.getText());
-            _comment.setUser(comment.getUser());
-            _comment.setForm(comment.getForm());
-            return new ResponseEntity<>(commentRepository.save(_comment), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        User loggedInUser = userRepository.findByUsername(principal.getName());
+        if (!loggedInUser.getRoles().stream().anyMatch(role -> role.getName().equals(UserRole.ROLE_ADMIN))
+                && !commentData.get().getUser().getUsername().equals(principal.getName())) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
+        if (!commentData.get().getForm().getId().equals(formId)
+                || commentData.get().getText() == null
+                || commentData.get().getText().isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        Comment _comment = commentData.get();
+        _comment.setText(comment.getText());
+        return new ResponseEntity<>(commentRepository.save(_comment), HttpStatus.OK);
     }
 
-    @DeleteMapping("/comments/{id}")
-    public ResponseEntity<HttpStatus> deleteComment(@PathVariable("id") UUID id) {
-        try {
-            commentRepository.deleteById(id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    @DeleteMapping("/forms/{formId}/comments/{id}")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    public ResponseEntity<HttpStatus> deleteComment(@PathVariable("formId") UUID formId,
+                                                    @PathVariable("id") UUID id,
+                                                    Principal principal) {
+        Optional<Comment> commentData = commentRepository.findById(id);
+        User loggedInUser = userRepository.findByUsername(principal.getName());
+        if (!loggedInUser.getRoles().stream().anyMatch(role -> role.getName().equals(UserRole.ROLE_ADMIN))
+                && !commentData.get().getUser().getUsername().equals(principal.getName())) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
+        if (!commentData.get().getForm().getId().equals(formId)
+                || commentData.get().getText() == null
+                || commentData.get().getText().isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+
+        commentRepository.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping("/comments")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<HttpStatus> deleteAllComments() {
-        try {
-            commentRepository.deleteAll();
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        commentRepository.deleteAll();
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

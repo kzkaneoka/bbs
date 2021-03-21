@@ -2,7 +2,6 @@ package com.github.kzkaneoka.bbs.controller;
 
 import com.github.kzkaneoka.bbs.enums.UserRole;
 import com.github.kzkaneoka.bbs.model.User;
-import com.github.kzkaneoka.bbs.repository.RoleRepository;
 import com.github.kzkaneoka.bbs.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
