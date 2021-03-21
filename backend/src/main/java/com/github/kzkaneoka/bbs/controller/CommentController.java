@@ -33,6 +33,7 @@ public class CommentController {
     FormRepository formRepository;
 
     @GetMapping("/comments")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<List<Comment>> getAllComments() {
         List<Comment> comments = new ArrayList<>();
         commentRepository.findAll().forEach(comments::add);
@@ -43,12 +44,14 @@ public class CommentController {
     }
 
     @GetMapping("/comments/{id}")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<Comment> getCommentById(@PathVariable("id") UUID id) {
         Optional<Comment> commentData = commentRepository.findById(id);
         return new ResponseEntity<>(commentData.get(), HttpStatus.OK);
     }
 
     @PostMapping("/forms/{formId}/comments")
+    @CrossOrigin(origins = "http://localhost:3000")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<Comment> createComment(@PathVariable("formId") UUID formId,
                                                  @RequestBody Comment comment, Principal principal) {
@@ -59,6 +62,7 @@ public class CommentController {
     }
 
     @PutMapping("/forms/{formId}/comments/{id}")
+    @CrossOrigin(origins = "http://localhost:3000")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<Comment> updateComment(@PathVariable("formId") UUID formId,
                                                  @PathVariable("id") UUID id,
@@ -80,6 +84,7 @@ public class CommentController {
     }
 
     @DeleteMapping("/forms/{formId}/comments/{id}")
+    @CrossOrigin(origins = "http://localhost:3000")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<HttpStatus> deleteComment(@PathVariable("formId") UUID formId,
                                                     @PathVariable("id") UUID id,
@@ -102,6 +107,7 @@ public class CommentController {
     }
 
     @DeleteMapping("/comments")
+    @CrossOrigin(origins = "http://localhost:3000")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<HttpStatus> deleteAllComments() {
         commentRepository.deleteAll();

@@ -28,6 +28,7 @@ public class FormController {
     UserRepository userRepository;
 
     @GetMapping("/forms")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<List<Form>> getAllForms() {
         List<Form> forms = new ArrayList<>();
         formRepository.findAll().forEach(forms::add);
@@ -38,12 +39,14 @@ public class FormController {
     }
 
     @GetMapping("/forms/{id}")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<Form> getFormById(@PathVariable("id") UUID id) {
         Optional<Form> formData = formRepository.findById(id);
         return new ResponseEntity<>(formData.get(), HttpStatus.OK);
     }
 
     @PostMapping("/forms")
+    @CrossOrigin(origins = "http://localhost:3000")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<Form> createForm(@RequestBody Form form, Principal principal) {
         if (form.getTitle() == null
@@ -58,6 +61,7 @@ public class FormController {
     }
 
     @PutMapping("/forms/{id}")
+    @CrossOrigin(origins = "http://localhost:3000")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<Form> updateForm(@PathVariable("id") UUID id, @RequestBody Form form, Principal principal) {
         Optional<Form> formData = formRepository.findById(id);
@@ -76,6 +80,7 @@ public class FormController {
     }
 
     @DeleteMapping("/forms/{id}")
+    @CrossOrigin(origins = "http://localhost:3000")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<HttpStatus> deleteForm(@PathVariable("id") UUID id, Principal principal) {
         Optional<Form> formData = formRepository.findById(id);
@@ -89,6 +94,7 @@ public class FormController {
     }
 
     @DeleteMapping("/forms")
+    @CrossOrigin(origins = "http://localhost:3000")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<HttpStatus> deleteAllForms() {
         formRepository.deleteAll();

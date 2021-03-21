@@ -6,5 +6,18 @@ services:
       - 8080:8080
     networks:
       - react-spring
+  frontend:
+    build:
+      context: frontend
+      target: development
+    ports:
+      - 3000:3000
+    volumes:
+      - ./frontend/src:/code/src
+      - /project/node_modules
+    networks:
+      - react-spring
+    depends_on:
+      - backend
 networks:
   react-spring: {}

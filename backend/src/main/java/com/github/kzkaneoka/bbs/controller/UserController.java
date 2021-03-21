@@ -27,6 +27,7 @@ public class UserController {
     UserRepository userRepository;
 
     @GetMapping("/users")
+    @CrossOrigin(origins = "http://localhost:3000")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<User>> getAllUsers() {
         List<User> users = new ArrayList<>();
@@ -38,6 +39,7 @@ public class UserController {
     }
 
     @GetMapping("/users/{id}")
+    @CrossOrigin(origins = "http://localhost:3000")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<User> getUserById(@PathVariable("id") UUID id, Principal principal) {
         Optional<User> userData = userRepository.findById(id);
@@ -50,6 +52,7 @@ public class UserController {
     }
 
     @PutMapping("/users/{id}")
+    @CrossOrigin(origins = "http://localhost:3000")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<User> updateUser(@PathVariable("id") UUID id, @RequestBody User user, Principal principal) {
         Optional<User> userData = userRepository.findById(id);
@@ -68,6 +71,7 @@ public class UserController {
     }
 
     @DeleteMapping("/users/{id}")
+    @CrossOrigin(origins = "http://localhost:3000")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<HttpStatus> deleteUser(@PathVariable("id") UUID id, Principal principal) {
         Optional<User> userData = userRepository.findById(id);
@@ -81,6 +85,7 @@ public class UserController {
     }
 
     @DeleteMapping("/users")
+    @CrossOrigin(origins = "http://localhost:3000")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<HttpStatus> deleteAllUsers() {
         userRepository.deleteAll();

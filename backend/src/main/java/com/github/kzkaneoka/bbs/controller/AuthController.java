@@ -47,6 +47,7 @@ public class AuthController {
     JwtUtils jwtUtils;
 
     @PostMapping("/auth/login")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
         Authentication authentication = authenticationManager.authenticate(
@@ -68,6 +69,7 @@ public class AuthController {
     }
 
     @PostMapping("/auth/signup")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
         User user = new User(signUpRequest.getUsername(),
                 signUpRequest.getEmail(),
