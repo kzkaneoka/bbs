@@ -7,7 +7,7 @@ export default function Header() {
     <div className="header bg-primary">
       <h1>
         <Link to="/">
-          <i>BBS</i>
+          <i>Forms</i>
         </Link>
       </h1>
       <ul>
@@ -15,15 +15,12 @@ export default function Header() {
           <li>
             <Link to="/signup">Sign Up</Link>
           </li>
-
           <li>
             <Link to="/login">Log In</Link>
           </li>
-
           <li>
             <Link to="/form">Create Form</Link>
           </li>
-
           <li>
             <Link to="/logout">Log Out</Link>
           </li>

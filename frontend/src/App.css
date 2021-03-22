@@ -159,3 +159,25 @@ table td {
 table th {
   background: var(--light-color);
 }
+
+/* card */
+.card-container {
+  margin: 0px 20px;
+  padding: 0px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card {
+  border: 1px solid black;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  height: 300vx;
+  min-width: 400px;
+  float: left;
+  background-color: white;
+  border-radius: 10px;
+}
