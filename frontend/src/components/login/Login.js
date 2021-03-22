@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import { Heading } from '@chakra-ui/react';
 
 export default function Login() {
   const [user, setUser] = useState({
@@ -42,7 +43,7 @@ export default function Login() {
 
   return (
     <div className="form-container">
-      <h1>Log In</h1>
+      <Heading>Log In</Heading>
       <form onSubmit={onSubmit}>
         <div className="form-group">
           <label htmlFor="username">Username</label>

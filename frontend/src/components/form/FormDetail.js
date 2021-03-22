@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react';
 
-import { Container, VStack } from '@chakra-ui/react';
+import { Heading, Text, Container, VStack } from '@chakra-ui/react';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 
@@ -50,8 +50,10 @@ export default function FormDetail() {
 
   return (
     <Fragment>
-      <h2>{form.title}</h2>
-      <h3>{form.description}</h3>
+      <Heading as="h2">{form.title}</Heading>
+      <Text align="center" fontSize="30px">
+        {form.description}
+      </Text>
       <Container maxW="md" centerContent p={8}>
         <VStack spacing={8} w="100%">
           {Object.keys(comments).map((key) => {
@@ -73,6 +75,11 @@ export default function FormDetail() {
           )}
         </VStack>
       </Container>
+      {!isUser() && (
+        <Text align="center" fontSize="30px">
+          Please sign up / log in and add comments
+        </Text>
+      )}
     </Fragment>
   );
 }

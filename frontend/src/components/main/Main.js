@@ -2,8 +2,10 @@ import React, { Fragment, useEffect, useState } from 'react';
 
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { Heading } from '@chakra-ui/react';
 
 import Card from '../card/Card';
+import { isUser } from '../../utils/checkUser';
 
 export default function Main() {
   const [forms, setForms] = useState([]);
@@ -30,14 +32,10 @@ export default function Main() {
     fetchData();
   }, []);
 
-  if (
-    forms !== null &&
-    forms.length === 0 &&
-    localStorage.getItem('accessToken') === null
-  ) {
-    return <h2>Please sign up / log in and create form.</h2>;
+  if (forms !== null && forms.length === 0 && !isUser()) {
+    return <Heading as="h2">Please sign up / log in and create form.</Heading>;
   } else if (forms !== null && forms.length === 0) {
-    return <h2>Please create form.</h2>;
+    return <Heading as="h2">Please create form.</Heading>;
   }
 
   return (

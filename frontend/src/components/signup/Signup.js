@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import { Heading } from '@chakra-ui/react';
 
 export default function Signup() {
   const [user, setUser] = useState({
@@ -40,7 +41,7 @@ export default function Signup() {
 
   return (
     <div className="form-container">
-      <h1>Sign Up</h1>
+      <Heading>Sign Up</Heading>
       <form onSubmit={onSubmit}>
         <div className="form-group">
           <label htmlFor="username">Username</label>

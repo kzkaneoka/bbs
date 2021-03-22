@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import { Heading } from '@chakra-ui/react';
 
 export default function Form() {
   const [form, setForm] = useState({
@@ -41,7 +42,7 @@ export default function Form() {
 
   return (
     <div className="form-container">
-      <h1>Create Form</h1>
+      <Heading>Create Form</Heading>
       <form onSubmit={onSubmit}>
         <div className="form-group">
           <label htmlFor="title">Title</label>

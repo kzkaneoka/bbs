@@ -1,13 +1,15 @@
 import React from 'react';
 
+import { Text } from '@chakra-ui/react';
+
 export default function Card({ form }) {
   return (
     <div className="card">
       <div className="card-top">
-        <h2>{form.title}</h2>
+        <Text fontSize="30px">{form.title}</Text>
       </div>
       <div className="card=body">
-        <p>{form.description}</p>
+        <Text fontSize="25px">{form.description}</Text>
       </div>
     </div>
   );
