@@ -3,7 +3,7 @@ import React, { Fragment, useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-import Form from '../form/Form';
+import Card from '../card/Card';
 
 export default function Main() {
   const [forms, setForms] = useState([]);
@@ -45,7 +45,7 @@ export default function Main() {
       <div className="card-container">
         {Object.keys(forms).map((key) => (
           <Link to={`forms/${forms[key].id}`} key={key}>
-            <Form form={forms[key]} />
+            <Card form={forms[key]} />
           </Link>
         ))}
       </div>

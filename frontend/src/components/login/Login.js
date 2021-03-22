@@ -33,6 +33,7 @@ export default function Login() {
         config
       );
       localStorage.setItem('accessToken', response.data.accessToken);
+      localStorage.setItem('userId', response.data.id);
       history.push('/');
     } catch (error) {
       console.error(error);

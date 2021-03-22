@@ -8,7 +8,6 @@ export default function Logout() {
   useEffect(() => {
     localStorage.clear();
     history.push('/');
-    // eslint-disable-next-line
   }, []);
 
   return <h1>Logout</h1>;

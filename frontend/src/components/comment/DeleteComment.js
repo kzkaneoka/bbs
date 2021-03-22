@@ -2,10 +2,7 @@ import React, { Fragment } from 'react';
 
 import {
   Button,
-  FormControl,
-  Textarea,
   Modal,
-  ModalBody,
   ModalCloseButton,
   ModalContent,
   ModalFooter,

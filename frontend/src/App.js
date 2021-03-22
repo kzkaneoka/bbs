@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Header from './components/header/Header';
 import Main from './components/main/Main';
-import CreateForm from './components/form/CreateForm';
+import Form from './components/form/Form';
 import FormDetail from './components/form/FormDetail';
 import Signup from './components/signup/Signup';
 import Login from './components/login/Login';
@@ -19,7 +19,7 @@ export default function App() {
         <Header />
         <Switch>
           <Route exact path="/" component={Main}></Route>
-          <Route exact path="/form" component={CreateForm}></Route>
+          <Route exact path="/form" component={Form}></Route>
           <Route path="/forms/:formId" component={FormDetail}></Route>
           <Route exact path="/signup" component={Signup}></Route>
           <Route exact path="/login" component={Login}></Route>
