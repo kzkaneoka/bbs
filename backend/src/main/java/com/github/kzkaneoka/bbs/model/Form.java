@@ -18,7 +18,7 @@ public class Form implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
-    @Column(name = "title")
+    @Column(name = "title", unique = true)
     private String title;
     @Column(name = "description")
     private String description;

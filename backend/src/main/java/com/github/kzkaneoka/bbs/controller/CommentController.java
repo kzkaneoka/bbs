@@ -50,6 +50,14 @@ public class CommentController {
         return new ResponseEntity<>(commentData.get(), HttpStatus.OK);
     }
 
+    @GetMapping("/forms/{formId}/comments")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public ResponseEntity<List<Comment>> getCommentByFormId(@PathVariable("formId") UUID formId) {
+        List<Comment> comments = new ArrayList<>();
+        commentRepository.findAllByFormId(formId).forEach(comments::add);
+        return new ResponseEntity<>(comments, HttpStatus.OK);
+    }
+
     @PostMapping("/forms/{formId}/comments")
     @CrossOrigin(origins = "http://localhost:3000")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
