@@ -1,6 +1,6 @@
-package com.github.kzkaneoka.bbs.repository;
+package com.github.kzkaneoka.bbs.forms;
 
-import com.github.kzkaneoka.bbs.model.Form;
+import com.github.kzkaneoka.bbs.forms.Form;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

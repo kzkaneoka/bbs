@@ -2,10 +2,10 @@ package com.github.kzkaneoka.bbs.controller;
 
 import com.github.kzkaneoka.bbs.users.UserRole;
 import com.github.kzkaneoka.bbs.model.Comment;
-import com.github.kzkaneoka.bbs.model.Form;
+import com.github.kzkaneoka.bbs.forms.Form;
 import com.github.kzkaneoka.bbs.users.User;
 import com.github.kzkaneoka.bbs.repository.CommentRepository;
-import com.github.kzkaneoka.bbs.repository.FormRepository;
+import com.github.kzkaneoka.bbs.forms.FormRepository;
 import com.github.kzkaneoka.bbs.users.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -1,4 +1,4 @@
-package com.github.kzkaneoka.bbs.enums;
+package com.github.kzkaneoka.bbs.forms;
 
 public enum FormStatus {
     OPEN,
