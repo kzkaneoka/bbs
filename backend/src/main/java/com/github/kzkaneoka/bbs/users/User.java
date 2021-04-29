@@ -1,7 +1,8 @@
-package com.github.kzkaneoka.bbs.model;
+package com.github.kzkaneoka.bbs.users;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.github.kzkaneoka.bbs.enums.UserStatus;
+import com.github.kzkaneoka.bbs.model.Comment;
+import com.github.kzkaneoka.bbs.model.Form;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

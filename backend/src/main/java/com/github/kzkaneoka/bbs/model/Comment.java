@@ -1,5 +1,6 @@
 package com.github.kzkaneoka.bbs.model;
 
+import com.github.kzkaneoka.bbs.users.User;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

@@ -1,8 +1,5 @@
-package com.github.kzkaneoka.bbs.controller;
+package com.github.kzkaneoka.bbs.users;
 
-import com.github.kzkaneoka.bbs.enums.UserRole;
-import com.github.kzkaneoka.bbs.model.User;
-import com.github.kzkaneoka.bbs.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +15,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/v1")
 public class UserController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);

@@ -1,12 +1,12 @@
 package com.github.kzkaneoka.bbs.controller;
 
-import com.github.kzkaneoka.bbs.enums.UserRole;
+import com.github.kzkaneoka.bbs.users.UserRole;
 import com.github.kzkaneoka.bbs.model.Comment;
 import com.github.kzkaneoka.bbs.model.Form;
-import com.github.kzkaneoka.bbs.model.User;
+import com.github.kzkaneoka.bbs.users.User;
 import com.github.kzkaneoka.bbs.repository.CommentRepository;
 import com.github.kzkaneoka.bbs.repository.FormRepository;
-import com.github.kzkaneoka.bbs.repository.UserRepository;
+import com.github.kzkaneoka.bbs.users.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +20,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/v1")
 public class CommentController {
 
     @Autowired

@@ -1,6 +1,6 @@
-package com.github.kzkaneoka.bbs.repository;
+package com.github.kzkaneoka.bbs.users;
 
-import com.github.kzkaneoka.bbs.model.User;
+import com.github.kzkaneoka.bbs.users.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,6 +1,6 @@
-package com.github.kzkaneoka.bbs.model;
+package com.github.kzkaneoka.bbs.users;
 
-import com.github.kzkaneoka.bbs.enums.UserRole;
+import com.github.kzkaneoka.bbs.users.UserRole;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

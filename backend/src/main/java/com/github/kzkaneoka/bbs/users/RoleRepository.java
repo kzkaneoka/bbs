@@ -1,7 +1,7 @@
-package com.github.kzkaneoka.bbs.repository;
+package com.github.kzkaneoka.bbs.users;
 
-import com.github.kzkaneoka.bbs.enums.UserRole;
-import com.github.kzkaneoka.bbs.model.Role;
+import com.github.kzkaneoka.bbs.users.UserRole;
+import com.github.kzkaneoka.bbs.users.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

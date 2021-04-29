@@ -1,4 +1,4 @@
-package com.github.kzkaneoka.bbs.enums;
+package com.github.kzkaneoka.bbs.users;
 
 public enum UserStatus {
     ACTIVE,

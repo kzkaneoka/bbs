@@ -1,13 +1,13 @@
 package com.github.kzkaneoka.bbs.controller;
 
-import com.github.kzkaneoka.bbs.enums.UserRole;
-import com.github.kzkaneoka.bbs.model.Role;
-import com.github.kzkaneoka.bbs.model.User;
+import com.github.kzkaneoka.bbs.users.UserRole;
+import com.github.kzkaneoka.bbs.users.Role;
+import com.github.kzkaneoka.bbs.users.User;
 import com.github.kzkaneoka.bbs.payload.request.LoginRequest;
 import com.github.kzkaneoka.bbs.payload.request.SignupRequest;
 import com.github.kzkaneoka.bbs.payload.response.JwtResponse;
-import com.github.kzkaneoka.bbs.repository.RoleRepository;
-import com.github.kzkaneoka.bbs.repository.UserRepository;
+import com.github.kzkaneoka.bbs.users.RoleRepository;
+import com.github.kzkaneoka.bbs.users.UserRepository;
 import com.github.kzkaneoka.bbs.security.UserDetailsImpl;
 import com.github.kzkaneoka.bbs.security.jwt.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +23,12 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/v1")
 public class AuthController {
     @Autowired
     AuthenticationManager authenticationManager;

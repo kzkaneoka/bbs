@@ -1,7 +1,7 @@
 package com.github.kzkaneoka.bbs.security;
 
-import com.github.kzkaneoka.bbs.model.User;
-import com.github.kzkaneoka.bbs.repository.UserRepository;
+import com.github.kzkaneoka.bbs.users.User;
+import com.github.kzkaneoka.bbs.users.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
