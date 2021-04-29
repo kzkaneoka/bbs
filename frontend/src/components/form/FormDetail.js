@@ -14,7 +14,7 @@ export default function FormDetail() {
   const location = useLocation();
 
   const fetchForm = async () => {
-    const url = 'http://localhost:8080/api' + location.pathname;
+    const url = 'http://localhost:8080/api/v1' + location.pathname;
     const config = {
       headers: {
         'Content-Type': 'application/json',
@@ -29,7 +29,8 @@ export default function FormDetail() {
   };
 
   const fetchComments = async () => {
-    const url = 'http://localhost:8080/api' + location.pathname + '/comments';
+    const url =
+      'http://localhost:8080/api/v1' + location.pathname + '/comments';
     const config = {
       headers: {
         'Content-Type': 'application/json',

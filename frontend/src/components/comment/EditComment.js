@@ -19,7 +19,7 @@ import axios from 'axios';
 export default function EditComment({ comment, fetchComments }) {
   const [text, setText] = useState('');
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const url = `http://localhost:8080/api/forms/${comment.form.id}/comments/${comment.id}`;
+  const url = `http://localhost:8080/api/v1/forms/${comment.form.id}/comments/${comment.id}`;
 
   const handleSubmit = async () => {
     const data = {

@@ -19,7 +19,7 @@ import axios from 'axios';
 export default function AddComment({ formId, fetchComments }) {
   const [text, setText] = useState('');
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const url = `http://localhost:8080/api${formId}/comments`;
+  const url = `http://localhost:8080/api/v1${formId}/comments`;
 
   const handleSubmit = async () => {
     const data = {

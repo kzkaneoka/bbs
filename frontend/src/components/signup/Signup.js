@@ -32,7 +32,11 @@ export default function Signup() {
       },
     };
     try {
-      await axios.post('http://localhost:8080/api/auth/signup', data, config);
+      await axios.post(
+        'http://localhost:8080/api/v1/auth/signup',
+        data,
+        config
+      );
       history.push('/login');
     } catch (error) {
       console.error(error);
