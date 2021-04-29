@@ -1,4 +1,4 @@
-package com.github.kzkaneoka.bbs.model;
+package com.github.kzkaneoka.bbs.comments;
 
 import com.github.kzkaneoka.bbs.forms.Form;
 import com.github.kzkaneoka.bbs.users.User;

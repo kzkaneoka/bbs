@@ -1,6 +1,6 @@
-package com.github.kzkaneoka.bbs.repository;
+package com.github.kzkaneoka.bbs.comments;
 
-import com.github.kzkaneoka.bbs.model.Comment;
+import com.github.kzkaneoka.bbs.comments.Comment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

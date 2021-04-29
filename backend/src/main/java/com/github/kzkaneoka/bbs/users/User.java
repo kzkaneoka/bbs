@@ -1,7 +1,7 @@
 package com.github.kzkaneoka.bbs.users;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.github.kzkaneoka.bbs.model.Comment;
+import com.github.kzkaneoka.bbs.comments.Comment;
 import com.github.kzkaneoka.bbs.forms.Form;
 import lombok.Data;
 import lombok.NoArgsConstructor;
