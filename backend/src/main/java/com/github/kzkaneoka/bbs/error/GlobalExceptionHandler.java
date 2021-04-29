@@ -7,11 +7,15 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.NoSuchElementException;
 
 
 @ControllerAdvice(annotations = RestController.class)
@@ -47,6 +51,24 @@ public class GlobalExceptionHandler {
     public ResponseEntity<JsonResponse> handleInternalAuthenticationServiceException(InternalAuthenticationServiceException e) {
         LOGGER.error("InternalAuthenticationServiceException: {}", e.getMessage());
         return new ResponseEntity<JsonResponse>(new JsonResponse("Resource not found"), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(value = {NoSuchElementException.class})
+    public ResponseEntity<JsonResponse> handleNoSuchElementException(NoSuchElementException e) {
+        LOGGER.error("NoSuchElementException: {}", e.getMessage());
+        return new ResponseEntity<JsonResponse>(new JsonResponse("Resource not found"), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(value = {AccessDeniedException.class})
+    public ResponseEntity<JsonResponse> handleAccessDeniedException(AccessDeniedException e) {
+        LOGGER.error("AccessDeniedException: {}", e.getMessage());
+        return new ResponseEntity<JsonResponse>(new JsonResponse("Unauthorized request"), HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler(value = {HttpRequestMethodNotSupportedException.class})
+    public ResponseEntity<JsonResponse> handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
+        LOGGER.error("HttpRequestMethodNotSupportedException: {}", e.getMessage());
+        return new ResponseEntity<JsonResponse>(new JsonResponse("Method not allowed"), HttpStatus.METHOD_NOT_ALLOWED);
     }
 
     @ExceptionHandler(value = { Exception.class })
