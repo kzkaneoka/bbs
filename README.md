@@ -2,6 +2,13 @@
 
 BBS is a web application using Java/Spring for backend and Javascript/React for frontend.
 
+## User Stories
+
+- User can sign up, login, and logout.
+- User can add/modify forms.
+- User can delete empty forms.
+- User can add/modify comments on forms.
+
 ## API Endpoints
 
 ```sh
