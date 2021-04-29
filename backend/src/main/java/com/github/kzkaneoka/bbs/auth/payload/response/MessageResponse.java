@@ -1,4 +1,4 @@
-package com.github.kzkaneoka.bbs.payload.response;
+package com.github.kzkaneoka.bbs.auth.payload.response;
 
 public class MessageResponse {
     private String message;

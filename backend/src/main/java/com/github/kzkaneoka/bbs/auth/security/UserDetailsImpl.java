@@ -1,4 +1,4 @@
-package com.github.kzkaneoka.bbs.security;
+package com.github.kzkaneoka.bbs.auth.security;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.kzkaneoka.bbs.users.User;

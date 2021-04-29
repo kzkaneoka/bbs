@@ -1,4 +1,4 @@
-package com.github.kzkaneoka.bbs.security.jwt;
+package com.github.kzkaneoka.bbs.auth.security.jwt;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

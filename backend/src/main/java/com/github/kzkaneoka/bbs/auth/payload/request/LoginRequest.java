@@ -1,4 +1,4 @@
-package com.github.kzkaneoka.bbs.payload.request;
+package com.github.kzkaneoka.bbs.auth.payload.request;
 
 import javax.validation.constraints.NotBlank;
 

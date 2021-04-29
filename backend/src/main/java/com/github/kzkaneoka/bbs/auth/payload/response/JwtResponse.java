@@ -1,4 +1,4 @@
-package com.github.kzkaneoka.bbs.payload.response;
+package com.github.kzkaneoka.bbs.auth.payload.response;
 
 import java.util.List;
 import java.util.UUID;

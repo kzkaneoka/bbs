@@ -1,15 +1,15 @@
-package com.github.kzkaneoka.bbs.controller;
+package com.github.kzkaneoka.bbs.auth;
 
 import com.github.kzkaneoka.bbs.users.UserRole;
 import com.github.kzkaneoka.bbs.users.Role;
 import com.github.kzkaneoka.bbs.users.User;
-import com.github.kzkaneoka.bbs.payload.request.LoginRequest;
-import com.github.kzkaneoka.bbs.payload.request.SignupRequest;
-import com.github.kzkaneoka.bbs.payload.response.JwtResponse;
+import com.github.kzkaneoka.bbs.auth.payload.request.LoginRequest;
+import com.github.kzkaneoka.bbs.auth.payload.request.SignupRequest;
+import com.github.kzkaneoka.bbs.auth.payload.response.JwtResponse;
 import com.github.kzkaneoka.bbs.users.RoleRepository;
 import com.github.kzkaneoka.bbs.users.UserRepository;
-import com.github.kzkaneoka.bbs.security.UserDetailsImpl;
-import com.github.kzkaneoka.bbs.security.jwt.JwtUtils;
+import com.github.kzkaneoka.bbs.auth.security.UserDetailsImpl;
+import com.github.kzkaneoka.bbs.auth.security.jwt.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

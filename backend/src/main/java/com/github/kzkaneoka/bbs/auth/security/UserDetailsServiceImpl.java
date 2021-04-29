@@ -1,4 +1,4 @@
-package com.github.kzkaneoka.bbs.security;
+package com.github.kzkaneoka.bbs.auth.security;
 
 import com.github.kzkaneoka.bbs.users.User;
 import com.github.kzkaneoka.bbs.users.UserRepository;

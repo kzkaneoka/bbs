@@ -1,11 +1,11 @@
-package com.github.kzkaneoka.bbs.security;
+package com.github.kzkaneoka.bbs.config;
 
-import com.github.kzkaneoka.bbs.security.jwt.AuthEntryPointJwt;
-import com.github.kzkaneoka.bbs.security.jwt.AuthTokenFilter;
+import com.github.kzkaneoka.bbs.auth.security.UserDetailsServiceImpl;
+import com.github.kzkaneoka.bbs.auth.security.jwt.AuthEntryPointJwt;
+import com.github.kzkaneoka.bbs.auth.security.jwt.AuthTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;

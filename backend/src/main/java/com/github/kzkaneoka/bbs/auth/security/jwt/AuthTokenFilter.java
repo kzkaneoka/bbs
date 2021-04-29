@@ -1,6 +1,6 @@
-package com.github.kzkaneoka.bbs.security.jwt;
+package com.github.kzkaneoka.bbs.auth.security.jwt;
 
-import com.github.kzkaneoka.bbs.security.UserDetailsServiceImpl;
+import com.github.kzkaneoka.bbs.auth.security.UserDetailsServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
