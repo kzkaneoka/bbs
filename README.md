@@ -2,48 +2,80 @@
 
 BBS is a web application using Java/Spring for backend and Javascript/React for frontend.
 
-## User Stories
-
-- User can sign up, login, and logout.
-- User can add/modify forms.
-- User can delete empty forms.
-- User can add/modify comments on forms.
-
-## API Endpoints
-
-```sh
-# /auth
-POST /auth/signup
-POST /auth/login
-
-# /users
-GET /users
-GET /users/{id}
-POST /users/{id}
-PUT /users/{id}
-DELETE /users
-DELETE /users/{id}
-
-# /forms
-GET /forms
-GET /forms/{id}
-POST /forms
-PUT /forms/{id}
-DELETE /forms
-DELETE /forms/{id}
-
-# /comments
-GET /comments
-GET /forms/{formId}/comments
-GET /comments/{id}
-POST /forms/{formId}/comments
-PUT /forms/{formId}/comments/{id}
-DELETE /forms/{formId}/comments/{id}
-DELETE /comments
-```
-
 ## How To Run
 
-```sh
+```
+1) Run docker locally
 $ docker-compose up
+
+2) Access http://localhost:3000 on browser of your choice
+```
+
+## User Stories
+
+User can signup, and login.
+
+```
+POST http://localhost:8080/api/v1/auth/signup
+{
+    "username: "username",
+    "email": "email",
+    "password": "password"
+}
+
+POST http://localhost:8080/api/v1/auth/login
+{
+    "username: "username",
+    "password": "password"
+}
+```
+
+User can get/update its profile.
+
+```
+GET http://localhost:8080/api/v1/users/{id}
+
+PUT http://localhost:8080/api/v1/users/{id}
+{
+    "username": "username"
+}
+```
+
+User can create/get/modify/delete forms.
+
+```
+GET http://localhost:8080/api/v1/forms
+
+GET http://localhost:8080/api/v1/forms/{id}
+
+POST http://localhost:8080/api/v1/forms
+{
+    "title": "title",
+    "description": "description"
+}
+
+PUT http://localhost:8080/api/v1/forms/{id}
+{
+    "title": "title"
+}
+
+DELETE http://localhost:8080/api/v1/forms/{id}
+```
+
+User can create/get/add/modify/delete comments on forms.
+
+```
+GET http://localhost:8080/api/v1/comments/{id}
+
+POST http://localhost:8080/api/v1/forms/{formId}/comments
+{
+    "text": "text"
+}
+
+PUT http://localhost:8080/api/v1/comments/{id}
+{
+    "text": "text"
+}
+
+DELETE http://localhost:8080/api/v1/comments/{id}
 ```
